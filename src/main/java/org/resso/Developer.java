@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -21,13 +23,19 @@ public class Developer {
     private int age;
     private String language;
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST)
-    private List<Computer> computers;
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST) //mapped in Computer
+    @ToString.Exclude
+    private List<Computer> computers = new ArrayList<>();
 
-    public Developer(String name, int age, String language, List<Computer> computers) {
+    public Developer(String name, int age, String language) {
         this.name = name;
         this.age = age;
         this.language = language;
-        this.computers = computers;
+    }
+
+    //adds computer to computers and sets computer owner field to this dev
+    public void addComputer(Computer computer) {
+        computers.add(computer);
+        computer.setOwner(this);
     }
 }

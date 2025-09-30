@@ -4,9 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
-
+import lombok.ToString;
 
 @Data
 @AllArgsConstructor
@@ -26,14 +24,23 @@ public class Computer {
 
     @ManyToOne
     @JoinColumn(name = "developer_id")
+    @ToString.Exclude
     private Developer owner;
 
-    public Computer(String computerType, Developer owner, int diskGB, int ramGB, String gpu, String cpu) {
+    public Computer(String computerType, String cpu, String gpu, int ramGB, int diskGB, Developer owner) {
         this.computerType = computerType;
-        this.owner = owner;
-        this.diskGB = diskGB;
-        this.ramGB = ramGB;
-        this.gpu = gpu;
         this.cpu = cpu;
+        this.gpu = gpu;
+        this.ramGB = ramGB;
+        this.diskGB = diskGB;
+        this.owner = owner;
+    }
+
+    public Computer(String computerType, String cpu, String gpu, int ramGB, int diskGB) {
+        this.computerType = computerType;
+        this.cpu = cpu;
+        this.gpu = gpu;
+        this.ramGB = ramGB;
+        this.diskGB = diskGB;
     }
 }
