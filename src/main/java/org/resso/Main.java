@@ -15,13 +15,13 @@ public class Main {
                 "jdbc:postgresql://%s:%s/%s",
                 dotenv.get("DB_HOST"),
                 dotenv.get("DB_PORT"),
-                dotenv.get("DB_NAME"));
+                dotenv.get("POSTGRES_DB"));
 
         //JDBC configuration
         Configuration cfg = new Configuration().configure();
         cfg.setProperty("hibernate.connection.url", url);
-        cfg.setProperty("hibernate.connection.username", dotenv.get("DB_USER"));
-        cfg.setProperty("hibernate.connection.password", dotenv.get("DB_PASSWORD"));
+        cfg.setProperty("hibernate.connection.username", dotenv.get("POSTGRES_USER"));
+        cfg.setProperty("hibernate.connection.password", dotenv.get("POSTGRES_PASSWORD"));
 
 
         Developer dev1 = new Developer("Bob", 22, "JS");
@@ -40,6 +40,8 @@ public class Main {
 
         //Developer dev1 = session.find(Developer.class, 1);
 
+        session.persist(dev1);
+        session.persist(dev2);
 
         session.getTransaction().commit();
 
