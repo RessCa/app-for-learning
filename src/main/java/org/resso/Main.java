@@ -24,21 +24,21 @@ public class Main {
         cfg.setProperty("hibernate.connection.password", dotenv.get("DB_PASSWORD"));
 
 
-        /*Developer dev1 = new Developer("Bob", 22, "JS");
+        Developer dev1 = new Developer("Bob", 22, "JS");
         Developer dev2 = new Developer("Rob", 32, "Swift");
 
         Computer comp1 = new Computer("PC", "intel i9 11900", "GeForce 1660", 16, 256);
         Computer comp2 = new Computer("Laptop", "intel i7 2700", "GeForce 660", 16, 516);
 
         dev1.addComputer(comp1);
-        dev2.addComputer(comp2);*/
+        dev2.addComputer(comp2);
 
         SessionFactory sessionFactory = cfg.buildSessionFactory();
 
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        Developer dev1 = session.find(Developer.class, 1);
+        //Developer dev1 = session.find(Developer.class, 1);
 
 
         session.getTransaction().commit();
