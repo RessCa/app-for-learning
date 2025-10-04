@@ -6,9 +6,9 @@ services:
     env_file:
       - .env
     depends_on:
-      - db
+      - app-for-learning-db
 
-  db:
+  app-for-learning-db:
     image: postgres:16
     restart: always
     env_file:
@@ -17,6 +17,7 @@ services:
       - "${DB_PORT}:5432"
     volumes:
       - prod-postgres-data:/var/lib/postgresql/data
+    container_name: app-for-learning-db
 
 volumes:
   prod-postgres-data:
